@@ -18,7 +18,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
         onChange={(e) => setQuery(e.target.value)}
       />
       <button
-        className="searchBTN bg-black p-2 rounded-md hover:bg-white"
+        className="searchBTN bg-black p-2 rounded-md hover:bg-red-600"
         onClick={() => onSearch(query)}
       >
         Find
