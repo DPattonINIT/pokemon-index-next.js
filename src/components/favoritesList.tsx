@@ -1,13 +1,12 @@
 "use client";
-import { getLocalStorage, removeFromLocalStorage } from "../utils/localStorage";
 
 interface FavoritesListProps {
-  favorites: string[]; 
-  onSelect: (query: string) => void; 
-  onRemove: (name: string) => void; 
+  favorites: string[];
+  onSelect: (query: string) => void;
+  onRemove: (name: string) => void;
 }
 
-const FavoritesList: React.FC<FavoritesListProps> = ({ favorites, onSelect, onRemove }) => {
+function FavoritesList({ favorites, onSelect, onRemove }: FavoritesListProps) {
   return (
     <div className="favoritesContainer">
       <div className="favoritesBox p-4 border rounded-md shadow-md">
@@ -18,7 +17,7 @@ const FavoritesList: React.FC<FavoritesListProps> = ({ favorites, onSelect, onRe
               {name}
             </p>
             <button
-              onClick={() => onRemove(name)} 
+              onClick={() => onRemove(name)}
               className="text-red-500 hover:text-red-700"
             >
               X
@@ -28,6 +27,7 @@ const FavoritesList: React.FC<FavoritesListProps> = ({ favorites, onSelect, onRe
       </div>
     </div>
   );
-};
+}
 
 export default FavoritesList;
+

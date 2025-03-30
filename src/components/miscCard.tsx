@@ -1,5 +1,4 @@
 "use client";
-import { FC } from "react";
 
 interface MiscProps {
   abilities: string[];
@@ -8,7 +7,7 @@ interface MiscProps {
   evolution: string;
 }
 
-const Misc: FC<MiscProps> = ({ abilities, moves, location, evolution }) => {
+function Misc({ abilities, moves, location, evolution }: MiscProps) {
   return (
     <div className="miscContainer">
       <div className="abilitiesContainer">
@@ -29,6 +28,6 @@ const Misc: FC<MiscProps> = ({ abilities, moves, location, evolution }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Misc;
