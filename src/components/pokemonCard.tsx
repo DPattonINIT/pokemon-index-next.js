@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image"; // Import Image component from next/image
 
 interface PokemonProps {
   name: string;
   image: string;
   shinyImage: string;
   type: string;
-  abilities: string[];
+  abilities: string[]; // If you're going to use these props later, just ignore the warning for now.
   moves: string[];
   location: string;
   evolution: string;
@@ -31,10 +32,12 @@ function PokemonCard({
   return (
     <div className="pokemonContainer">
       <div className="topCard">
-        <img
+        <Image
           src={isShiny ? shinyImage : image}
           alt={name}
-          className="w-32 mx-auto"
+          width={128}  
+          height={128} 
+          className="mx-auto"
         />
         <h2 className="text-center text-xl font-bold">{name}</h2>
       </div>
