@@ -5,9 +5,12 @@ import PokemonCard from "@/components/pokemonCard";
 import SearchBar from "@/components/searchBar";
 import { useState, useEffect } from "react";
 import { saveToLocalStorage, getLocalStorage } from "@/utils/localStorage";
+import type { PokemonData } from "@/types/PokemonData";
+
 
 export default function Home() {
-  const [pokemon, setPokemon] = useState<any | null>(null);
+  const [pokemon, setPokemon] = useState<PokemonData | null>(null);
+
   const [favorites, setFavorites] = useState<string[]>([]); 
 
  
@@ -26,27 +29,36 @@ export default function Home() {
     if (!evolutionChainResponse.ok) return alert("Evolution chain data not found.");
     const evolutionChainData = await evolutionChainResponse.json();
 
-    const extractEvolution = (chain: any): string => {
+    type EvolutionChain = {
+      species: { name: string };
+      evolves_to: EvolutionChain[];
+    };
+    
+    const extractEvolution = (chain: EvolutionChain): string => {
       let evolution = chain.species.name;
       if (chain.evolves_to.length > 0) {
         evolution += " → " + chain.evolves_to.map(extractEvolution).join(" → ");
       }
       return evolution;
     };
+    
+    
 
     const evolutionPath = extractEvolution(evolutionChainData.chain);
 
     const location = data.game_indices.length
-      ? data.game_indices.map((g: any) => g.version.name).join(", ")
-      : "N/A"; 
+  ? data.game_indices.map((g: { version: { name: string } }) => g.version.name).join(", ")
+  : "N/A";
+
 
     setPokemon({
       name: data.name,
       image: data.sprites.front_default,
       shinyImage: data.sprites.front_shiny,
-      type: data.types.map((t: any) => t.type.name).join(", "),
-      abilities: data.abilities.map((a: any) => a.ability.name),
-      moves: data.moves.map((m: any) => m.move.name),
+      type: data.types.map((t: { type: { name: string } }) => t.type.name).join(", "),
+      abilities: data.abilities.map((a: { ability: { name: string } }) => a.ability.name),
+      moves: data.moves.map((m: { move: { name: string } }) => m.move.name),
+      
       location, 
       evolution: evolutionPath, 
     });

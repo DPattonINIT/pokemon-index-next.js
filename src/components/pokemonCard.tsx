@@ -1,13 +1,13 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image"; // Import Image component from next/image
+import Image from "next/image"; 
 
 interface PokemonProps {
   name: string;
   image: string;
   shinyImage: string;
   type: string;
-  abilities: string[]; // If you're going to use these props later, just ignore the warning for now.
+  abilities: string[]; 
   moves: string[];
   location: string;
   evolution: string;
@@ -20,10 +20,6 @@ function PokemonCard({
   image,
   shinyImage,
   type,
-  abilities,
-  moves,
-  location,
-  evolution,
   onFavorite,
   onRandom,
 }: PokemonProps) {
@@ -35,8 +31,8 @@ function PokemonCard({
         <Image
           src={isShiny ? shinyImage : image}
           alt={name}
-          width={128}  
-          height={128} 
+          width={128}
+          height={128}
           className="mx-auto"
         />
         <h2 className="text-center text-xl font-bold">{name}</h2>
